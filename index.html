@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>KupaRashit</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <title>Choose User</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="home-body">
   <h1>KupaRashit</h1>
-  <img src="assets/icons/cashier.png" alt="Cashier Icon" />
+  <div class="cashier-icon">🧾</div>
+
   <div class="btn-container">
-    <a href="pages/login.html" class="btn">Staff</a>
-    <a href="pages/menu.html" class="btn">Customer</a>
+    <button class="btn" onclick="chooseUser('manager')">Staff</button>
+    <button class="btn" onclick="chooseUser('customer')">Customer</button>
   </div>
+
+  <script>
+    function chooseUser(type) {
+      localStorage.setItem("userType", type);
+      if (type === "manager") {
+        window.location.href = "/pages/adminlogin.html";
+      } else {
+        window.location.href = "/pages/customerlogin.html";
+      }
+    }
+  </script>
 </body>
 </html>

@@ -1,11 +1,138 @@
-body { font-family: sans-serif; background: #fff7f0; padding: 20px; }
-a { color: #0066cc; font-weight: bold; text-decoration: none; }
-body {
+/* Reset כללי */
+* {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f7f7f7;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+}
+
+/* ===== עמוד בית (בחירת משתמש) ===== */
+.home-body {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.home-body h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.home-body img {
+  width: 50px;
+  margin-bottom: 30px;
+}
+
+.btn-container {
+  display: flex;
+  gap: 30px;
+}
+
+.btn {
+  background-color: #96cbf7;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #7ab8e7;
+}
+
+/* ===== עמוד Login ===== */
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.logo {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cashier-icon {
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.login-box {
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding: 30px 40px;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.login-box label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background-color: #444;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.forgot {
+  display: block;
+  margin-top: 10px;
+  color: #333;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ===== עמוד Dashboard ===== */
 .container {
   display: flex;
 }
@@ -19,8 +146,9 @@ body {
   border-right: 1px solid #ccc;
 }
 
-.logo {
+.sidebar .logo {
   text-align: center;
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
@@ -67,117 +195,9 @@ body {
 .dish-card .price {
   font-weight: bold;
 }
-.home-body {
-  font-family: 'Arial', sans-serif;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
 
-.home-body h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-}
-
-.home-body img {
-  width: 40px;
-  margin-bottom: 30px;
-}
-
-.btn-container {
-  display: flex;
-  gap: 30px;
-}
-
-.btn {
-  background-color: #96cbf7;
-  border: none;
-  padding: 20px 40px;
-  border-radius: 20px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: 0.2s;
-  text-decoration: none;
-  color: black;
-}
-
-.btn:hover {
-  background-color: #7ab8e7;
-}
-.login-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #fff;
-}
-
-.login-container {
-  text-align: center;
-}
-
-.login-box {
-  border: 2px solid #000;
-  border-radius: 8px;
-  padding: 30px 40px;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.logo {
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.cashier-icon {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #222;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.forgot {
-  display: block;
-  margin-top: 10px;
-  color: #333;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.error {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
-}
+/* ===== עמוד Add Dish ===== */
 .add-dish-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
   background-color: #f5f5f5;
   display: flex;
   justify-content: center;
@@ -202,7 +222,6 @@ button {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
 }
 
 .add-dish-form textarea {
