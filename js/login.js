@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
-  const usernameInput = document.getElementById("Username");
+  const usernameInput = document.getElementById("Username"); // שימי לב לאות קטנה
   const passwordInput = document.getElementById("password");
   const errorText = document.getElementById("errorMsg");
 
@@ -32,7 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       localStorage.setItem("userToken", data.token);
-      window.location.href = "/pages/dashboard.html";
+
+      const isAdminLogin = window.location.pathname.includes("adminlogin");
+
+      if (isAdminLogin) {
+        window.location.href = "/pages/dashboard.html";
+      } else {
+        window.location.href = "/pages/menu.html";
+      }
+
     } catch (err) {
       console.error("Login error:", err);
       showError("שגיאה בשרת, נסי שוב מאוחר יותר.");
