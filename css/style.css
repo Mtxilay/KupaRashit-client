@@ -245,3 +245,54 @@ body {
 .add-dish-form button:hover {
   background-color: #218838;
 }
+.dish-card {
+  background-color: #d6eafd;
+  border-radius: 12px;
+  width: 300px;
+  padding: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+.dish-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.dish-card h3 {
+  margin-top: 10px;
+  background: #96cbf7;
+  color: white;
+  font-size: 22px;
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+}
+
+.dish-card .price {
+  font-weight: bold;
+  font-size: 18px;
+  color: #444;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+  justify-content: start;
+}
+
+.action-buttons button {
+  padding: 5px 8px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-btn { background-color: #007bff; color: white; }
+.stats-btn { background-color: #0275d8; color: white; }
+.ing-btn { background-color: transparent; color: #0275d8; text-decoration: underline; }
+.delete-btn { background-color: #dc3545; color: white; }

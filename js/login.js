@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const isAdminLogin = window.location.pathname.includes("adminlogin");
 
       if (isAdminLogin) {
-        window.location.href = "/pages/dashboard.html";
+        window.location.href = "/pages/admindashboard.html";
       } else {
-        window.location.href = "/pages/menu.html";
+        window.location.href = "/pages/customerdashboard.html";
       }
 
     } catch (err) {
