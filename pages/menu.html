@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <h1>Customer Menu</h1>
+  <div id="menu-container">
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/api.js"></script>
+  <script>
+    async function loadMenu() {
+      const res = await fetch("http://localhost:3000/api/dishes");
+      const dishes = await res.json();
+
+      const container = document.getElementById("menu-container");
+      container.innerHTML = dishes.map(dish => `
+        <div class="dish-card">
+          <h3>${dish.name}</h3>
+          <p>Price: ₪${dish.price}</p>
+          <button>Add to Order</button>
+        </div>
+      `).join("");
+    }
+
+    loadMenu();
+  </script>
+</body>
+</html>
