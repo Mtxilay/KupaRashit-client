@@ -1,16 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Khand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/costumerdashboard.css" />
+</head>
 <body>
-  <div class="sidebar">
-    <button>Best Sellers</button>
-    <button>Starters</button>
-    <button>Main Courses</button>
-    <button>Side Dishes</button>
-    <button>Desserts</button>
-    <button>Beverages</button>
-    <button class="view-order">View Order</button>
+  <div id="dashboard">
+    <aside id="sidebar">
+      <div id="Managerlogo">
+        <img src="../images/CustomerLogo.png" alt="CustomerLogo" width="70">
+        <h2>Welcome<br>Customer!</h2>
+      </div>
+      <nav>
+        <button class="sidebar-btn btn-blue" onclick="navigate('order')">My Order</button>
+        <button class="sidebar-btn btn-blue" onclick="navigate('history')">Order History</button>
+        <button class="sidebar-btn btn-blue" onclick="navigate('profile')">Profile</button>
+        <button class="sidebar-btn btn-blue" onclick="navigate('support')">Support</button>
+        <button class="sidebar-btn btn-green" onclick="navigate('logout')">Logout</button>
+      </nav>
+    </aside>
+
+    <main id="main-content">
+      <section id="dishes-container" class="grid">
+      </section>
+    </main>
   </div>
 
-  <div id="dishes-container" class="dish-grid">
-  </div>
-
-  <script src="../js/customer-dashboard.js" defer></script>
+  <script src="../js/customer-dashboard.js"></script>
 </body>
+</html>

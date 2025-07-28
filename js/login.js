@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
-  const usernameInput = document.getElementById("Username"); // שימי לב לאות קטנה
+  const usernameInput = document.getElementById("Username"); 
   const passwordInput = document.getElementById("password");
   const errorText = document.getElementById("errorMsg");
 
