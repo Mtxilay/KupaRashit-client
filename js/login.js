@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
-  const usernameInput = document.getElementById("Username"); 
+  const usernameInput = document.getElementById("Username");
   const passwordInput = document.getElementById("password");
   const errorText = document.getElementById("errorMsg");
 
@@ -32,6 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       localStorage.setItem("userToken", data.token);
+
+      // 🔓 חילוץ userId מהטוקן (כי הוא לא מגיע מהשרת ישירות)
+      const payloadBase64 = data.token.split(".")[1];
+      const payloadJson = JSON.parse(atob(payloadBase64));
+      localStorage.setItem("userId", payloadJson.userId); // ← זה היה חסר
 
       const isAdminLogin = window.location.pathname.includes("adminlogin");
 

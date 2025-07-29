@@ -47,9 +47,8 @@ html, body {
   font-weight: lighter;
 }
 
-/* Sidebar Buttons */
+
 .sidebar-btn {
-  padding: 10px 12px;
   font-size: 36px;
   border: 2px solid black;
   border-radius: 6px;
@@ -159,4 +158,29 @@ html, body {
   font-size: 18px;
   font-weight: bold;
   color: #333;
+}
+.btn-pink {
+  background-color: #FF40C0;
+  color: white;
+  font-size: 28px;
+  border: 2px solid black;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  font-family: 'Khand', sans-serif;
+  text-align: center;
+}
+
+.btn-green-pay {
+  background-color: #00C800;
+  color: white;
+  font-size: 28px;
+  border: 2px solid black;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  font-family: 'Khand', sans-serif;
+  text-align: center;
 }
