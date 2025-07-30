@@ -1,4 +1,3 @@
-// customer-dashboard.js (מוכן עם כל הלוגיקה)
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("dishes-container");
   const token = localStorage.getItem("userToken");
@@ -24,9 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     container.innerHTML = "";
     try {
       const res = await fetch("https://kuparashit-server.onrender.com/api/dishes", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Unauthorized or server error");
 
@@ -47,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="rate-btn">Rate & Review</button>
           <div class="price">${dish.price.toFixed(2)}$</div>
         `;
-
         card.querySelector(".add-btn").addEventListener("click", () => {
           addToOrder(dish);
           showOrderActionButtons();
@@ -106,38 +102,27 @@ document.addEventListener("DOMContentLoaded", () => {
     return map[cat] || cat;
   }
 
-  // יצירת מודאל ההזמנה אם לא קיים
-  if (!document.getElementById("order-summary-modal")) {
-    const modal = document.createElement("div");
-    modal.id = "order-summary-modal";
-    modal.className = "modal hidden";
-    modal.innerHTML = `
-      <div class="modal-content">
-        <div id="order-items" class="order-list"></div>
-        <div class="order-footer">
-          <p>Total: <span id="order-total-price">0.00$</span></p>
-          <div class="order-buttons">
-            <button id="place-order" class="btn-green">Place Order</button>
-            <button id="cancel-order" class="btn-red">Cancel</button>
-          </div>
-        </div>
-      </div>`;
-    document.body.appendChild(modal);
-  }
-
   function showOrderModal() {
     const modal = document.getElementById("order-summary-modal");
     const orderItemsContainer = document.getElementById("order-items");
     const totalPriceElement = document.getElementById("order-total-price");
 
-    const order = JSON.parse(localStorage.getItem("currentOrder")) || [];
+    let order = JSON.parse(localStorage.getItem("currentOrder")) || [];
     orderItemsContainer.innerHTML = "";
     let total = 0;
 
-    order.forEach(item => {
-      const line = document.createElement("div");
-      line.textContent = `${item.quantity}X ${item.name} ${item.price.toFixed(2)}$`;
-      orderItemsContainer.appendChild(line);
+    order.forEach((item, index) => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "order-item";
+      itemDiv.innerHTML = `
+        <span>${item.quantity}× ${item.name} - ${item.price.toFixed(2)}$</span>
+        <div class="quantity-controls">
+          <button class="decrease" data-index="${index}">−</button>
+          <button class="increase" data-index="${index}">+</button>
+          <button class="remove" data-index="${index}">✕</button>
+        </div>
+      `;
+      orderItemsContainer.appendChild(itemDiv);
       total += item.quantity * item.price;
     });
 
@@ -145,38 +130,49 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("hidden");
   }
 
-  // לחצן ביטול וסגירת מודאל
   document.addEventListener("click", (e) => {
+    const index = e.target.dataset?.index;
+    if (index !== undefined) {
+      let order = JSON.parse(localStorage.getItem("currentOrder")) || [];
+
+      if (e.target.classList.contains("increase")) {
+        order[index].quantity += 1;
+      } else if (e.target.classList.contains("decrease")) {
+        order[index].quantity = Math.max(1, order[index].quantity - 1);
+      } else if (e.target.classList.contains("remove")) {
+        order.splice(index, 1);
+      }
+
+      localStorage.setItem("currentOrder", JSON.stringify(order));
+      showOrderModal();
+    }
+
     if (e.target && e.target.id === "cancel-order") {
       document.getElementById("order-summary-modal").classList.add("hidden");
     }
-  });
 
-  // שליחת הזמנה לשרת
-  document.addEventListener("click", async (e) => {
     if (e.target && e.target.id === "place-order") {
       const order = JSON.parse(localStorage.getItem("currentOrder")) || [];
       if (order.length === 0) return alert("Order is empty");
 
-      try {
-        const res = await fetch("https://kuparashit-server.onrender.com/api/orders", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-          body: JSON.stringify({ items: order }),
+      fetch("https://kuparashit-server.onrender.com/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ items: order }),
+      })
+        .then(res => {
+          if (!res.ok) throw new Error("Order failed");
+          alert("Order placed successfully!");
+          localStorage.removeItem("currentOrder");
+          document.getElementById("order-summary-modal").classList.add("hidden");
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Failed to place order.");
         });
-
-        if (!res.ok) throw new Error("Failed to place order");
-
-        alert("Order placed successfully!");
-        localStorage.removeItem("currentOrder");
-        document.getElementById("order-summary-modal").classList.add("hidden");
-      } catch (err) {
-        console.error("Order error:", err);
-        alert("Failed to place order");
-      }
     }
   });
 });

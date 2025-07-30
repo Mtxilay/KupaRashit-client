@@ -244,3 +244,24 @@ html, body {
   cursor: pointer;
   font-family: 'Khand', sans-serif;
 }
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.quantity-controls button {
+  margin-left: 6px;
+  padding: 4px 8px;
+  font-size: 16px;
+  background-color: #eee;
+  border: 1px solid #999;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.quantity-controls button:hover {
+  background-color: #ccc;
+}
