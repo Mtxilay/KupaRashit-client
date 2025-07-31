@@ -10,7 +10,7 @@
 <body>
   <div id="dashboard">
     <aside id="sidebar">
-      <div id="Managerlogo">
+      <div id="Customerlogo">
         <h2>Customer<br>Dashboard</h2>
       </div>
       <nav>
@@ -29,14 +29,58 @@
     </main>
   </div>
 
-
   <div id="order-summary-modal" class="hidden">
     <div class="order-box">
       <div id="order-items"></div>
       <div class="order-total">Total: <span id="order-total-price">0.00$</span></div>
+      <textarea id="order-comment-input" placeholder="Add a comment to your order..."></textarea>
       <div class="order-actions">
         <button id="place-order" class="btn-green-pay">Place Order</button>
         <button id="cancel-order" class="btn-red">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="review-modal" class="hidden">
+    <div class="review-box">
+      <h3 id="review-dish-name">Rate & Review</h3>
+      <div class="stars" id="star-rating">
+        <span data-value="1">★</span>
+        <span data-value="2">★</span>
+        <span data-value="3">★</span>
+        <span data-value="4">★</span>
+        <span data-value="5">★</span>
+      </div>
+      <textarea id="review-comment" placeholder="Write your review..."></textarea>
+      <div class="review-actions">
+        <button id="submit-review" class="btn-green-pay">Submit</button>
+        <button id="cancel-review" class="btn-red">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="all-reviews-modal" class="hidden">
+    <div class="review-list-box">
+      <h3>All Reviews</h3>
+      <div id="review-list-content"></div>
+      <button id="close-reviews-modal" class="btn-red">Close</button>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Total: <span id="paymentTotal">0.00$</span></h2>
+      <input type="text" id="cardNumber" placeholder="Card Number">
+      <div class="row">
+        <input type="text" id="expDate" placeholder="MM/YY">
+        <input type="text" id="ccv" placeholder="CCV">
+      </div>
+      <input type="text" id="cardHolder" placeholder="Card Holder's Name">
+      <p class="info">Cash payment at cash register only.</p>
+      <div class="btn-row">
+        <button class="confirm-btn" id="confirmPayment">Confirm</button>
+        <button class="cancel-btn" id="cancelPayment">Cancel</button>
       </div>
     </div>
   </div>

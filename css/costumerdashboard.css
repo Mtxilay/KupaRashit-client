@@ -265,3 +265,400 @@ html, body {
 .quantity-controls button:hover {
   background-color: #ccc;
 }
+#order-comment-input {
+  width: 100%;
+  min-height: 60px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Khand', sans-serif;
+  font-size: 1rem;
+  resize: vertical;
+  box-sizing: border-box;
+  background-color: #fdfdfd;
+  transition: border-color 0.2s ease-in-out;
+}
+
+#order-comment-input:focus {
+  border-color: #66afe9;
+  outline: none;
+  background-color: #fff;
+}
+/* View Dish Modal Styling */
+#view-dish-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.view-dish-box {
+  background-color: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  font-family: 'Khand', sans-serif;
+  text-align: center;
+}
+
+.view-dish-box h3 {
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.view-dish-box img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.view-dish-box p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+#close-view-dish {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+#close-view-dish:hover {
+  background-color: #c0392b;
+}
+
+/* Existing base assumed styles not shown */
+
+#order-comment-input {
+  width: 100%;
+  padding: 10px;
+  font-family: 'Khand', sans-serif;
+  font-size: 16px;
+  margin-top: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  min-height: 60px;
+  box-sizing: border-box;
+}
+
+#order-comment-input:focus {
+  border-color: #0077ff;
+  outline: none;
+}
+
+.dish-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dish-modal-content {
+  background: white;
+  padding: 25px;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 12px;
+  text-align: center;
+  font-family: 'Khand', sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dish-modal-content img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+.dish-modal-content p {
+  margin-top: 15px;
+  font-size: 24px;
+  color: #444;
+}
+
+.dish-modal-content h2 {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.dish-modal-content .btn-red {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dish-modal-content .btn-red:hover {
+  background: #c0392b;
+}
+/* בסיס למודל */
+#review-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  z-index: 9999; /* חשוב! שיישב מעל כל התוכן */
+  max-width: 500px;
+  width: 90%;
+  display: none;
+}
+
+#review-modal.show {
+  display: block;
+}
+
+#review-modal h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* כוכבים */
+.stars {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.stars span {
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s;
+}
+
+.stars span.active,
+.stars span:hover,
+.stars span:hover ~ span {
+  color: gold;
+}
+
+/* טקסט-אזור + כפתורים */
+#review-comment {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  font-family: inherit;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-actions button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-green-pay {
+  background-color: #00b300;
+  color: white;
+}
+
+.btn-red {
+  background-color: red;
+  color: white;
+}
+.dish-rating {
+  margin-top: 6px;
+  font-size: 18px;
+  color: #ebad01;
+  font-weight: 500;
+}
+.dish-rating {
+  margin-top: 6px;
+  font-size: 18px;
+  color: #f4c542;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* All Reviews Modal */
+#all-reviews-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#all-reviews-modal.show {
+  display: flex;
+}
+
+.review-list-box {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  font-family: 'Khand', sans-serif;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.review-list-box h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.review-entry {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.review-entry .stars {
+  color: gold;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.review-entry .comment {
+  font-size: 16px;
+  color: #444;
+}
+/* תשלום - מודל */
+#paymentModal.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#paymentModal.modal.show {
+  display: flex;
+}
+
+#paymentModal .modal-content {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  font-family: 'Khand', sans-serif;
+  text-align: center;
+}
+
+#paymentModal .modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #333;
+}
+
+#paymentModal input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  margin: 8px 0;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out;
+}
+
+#paymentModal input[type="text"]:focus {
+  border-color: #007AFF;
+  outline: none;
+}
+
+#paymentModal .row {
+  display: flex;
+  gap: 10px;
+}
+
+#paymentModal .btn-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#paymentModal .confirm-btn,
+#paymentModal .cancel-btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: 'Khand', sans-serif;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#paymentModal .confirm-btn {
+  background-color: #00C800;
+  color: white;
+}
+
+#paymentModal .confirm-btn:hover {
+  background-color: #00A000;
+}
+
+#paymentModal .cancel-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+#paymentModal .cancel-btn:hover {
+  background-color: #cc0000;
+}
+
+#paymentModal .info {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
