@@ -20,63 +20,73 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   async function loadDishes(categoryFilter = null) {
-    container.innerHTML = "";
-    try {
+  container.innerHTML = "";
+  try {
+    let dishes;
+
+    if (categoryFilter === "Best Sellers") {
+      const res = await fetch("https://kuparashit-server.onrender.com/api/statistics/top-selling", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Failed to fetch best sellers");
+      dishes = await res.json();
+    } else {
       const res = await fetch("https://kuparashit-server.onrender.com/api/dishes", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Unauthorized or server error");
-
-      const dishes = await res.json();
-      const filtered = categoryFilter ? dishes.filter(d => formatCategory(d.category) === categoryFilter) : dishes;
-
-      filtered.forEach(dish => {
-        const card = document.createElement("div");
-        card.className = "dish-card";
-        card.innerHTML = `
-          <h3>${dish.name}</h3>
-          <img src="${dish.image}" alt="${dish.name}">
-          <div class="actions">
-            <button class="view-btn">View</button>
-            <button class="add-btn">Add to Order</button>
-          </div>
-          <button class="rate-btn">Rate & Review</button>
-          <div class="price">${dish.price.toFixed(2)}$</div>
-        `;
-
-     
-        fetch(`https://kuparashit-server.onrender.com/api/reviews/dish/${dish._id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        .then(res => res.json())
-        .then(reviews => {
-          const avg = reviews.length === 0 ? 0 : reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / reviews.length;
-          const fullStars = Math.floor(avg);
-          const halfStar = avg - fullStars >= 0.5;
-          const starsHtml = "★".repeat(fullStars) + (halfStar ? "½" : "") + "☆".repeat(5 - fullStars - (halfStar ? 1 : 0));
-
-          const ratingDiv = document.createElement("div");
-          ratingDiv.className = "dish-rating";
-          ratingDiv.innerHTML = `${starsHtml} (${avg.toFixed(1)})`;
-          card.appendChild(ratingDiv);
-        });
-
-        card.querySelector(".add-btn").addEventListener("click", () => {
-          addToOrder(dish);
-          showOrderActionButtons();
-        });
-
-        card.querySelector(".view-btn").addEventListener("click", () => {
-          showDishModal(dish);
-        });
-
-        container.appendChild(card);
-      });
-    } catch (err) {
-      console.error("Failed to load dishes:", err);
-      container.innerHTML = `<p>Failed to load dishes. Please try again later.</p>`;
+      dishes = await res.json();
+      if (categoryFilter) {
+        dishes = dishes.filter(d => formatCategory(d.category) === categoryFilter);
+      }
     }
+
+    dishes.forEach(dish => {
+      const card = document.createElement("div");
+      card.className = "dish-card";
+      card.innerHTML = `
+        <h3>${dish.name}</h3>
+        <img src="${dish.image}" alt="${dish.name}">
+        <div class="actions">
+          <button class="view-btn">View</button>
+          <button class="add-btn">Add to Order</button>
+        </div>
+        <button class="rate-btn">Rate & Review</button>
+        <div class="price">${dish.price?.toFixed(2) || "N/A"}$</div>
+      `;
+
+      fetch(`https://kuparashit-server.onrender.com/api/reviews/dish/${dish._id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => res.json())
+      .then(reviews => {
+        const avg = reviews.length === 0 ? 0 : reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / reviews.length;
+        const fullStars = Math.floor(avg);
+        const halfStar = avg - fullStars >= 0.5;
+        const starsHtml = "★".repeat(fullStars) + (halfStar ? "½" : "") + "☆".repeat(5 - fullStars - (halfStar ? 1 : 0));
+
+        const ratingDiv = document.createElement("div");
+        ratingDiv.className = "dish-rating";
+        ratingDiv.innerHTML = `${starsHtml} (${avg.toFixed(1)})`;
+        card.appendChild(ratingDiv);
+      });
+
+      card.querySelector(".add-btn").addEventListener("click", () => {
+        addToOrder(dish);
+        showOrderActionButtons();
+      });
+
+      card.querySelector(".view-btn").addEventListener("click", () => {
+        showDishModal(dish);
+      });
+
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Failed to load dishes:", err);
+    container.innerHTML = "<p>Failed to load dishes. Please try again later.</p>";
   }
+}
 
   function formatCategory(cat) {
     const map = {

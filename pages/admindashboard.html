@@ -3,31 +3,342 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="../css/style.css" />
-  <script defer src="../js/manager.js"></script>
+  <title>Manager Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Khand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/managerStyle.css" />
+  <link rel="stylesheet" href="../css/modal.css">
+
+ 
 </head>
 <body>
-  <div class="container">
-    <aside class="sidebar">
-      <div class="logo">
-        <img src="../assets/logo.png" alt="Logo" />
-        <p>Welcome<br><strong>Manager!</strong></p>
-      </div>
-      <nav>
-        <button class="nav-btn">Dishes</button>
-        <button class="nav-btn">Statistics</button>
-        <button class="nav-btn">Reviews</button>
-        <button class="nav-btn">Settings</button>
-        <button class="nav-btn green">+ Add Dish</button>
-      </nav>
-    </aside>
+  <div id="dashboard">
+   <aside id="sidebar">
+  <div id="Managerlogo">
+    <img src="../images/ManagerLogo.png" alt="ManagerLogo" width="70">
+    <h2>Welcome<br>Manager!</h2>
+  </div>
+  <nav>
+    <button class="sidebar-btn btn-blue" onclick="navigate('dish-list')">Dishes</button>
+    <button class="sidebar-btn btn-blue" onclick="navigate('statistics-section')">Statistics</button>
+    <button class="sidebar-btn btn-blue" onclick="navigate('reviews-section')">Reviews</button>
+    <button class="sidebar-btn btn-blue" onclick="navigate('settings-section')">Settings</button>
+     <button class="sidebar-btn btn-green" onclick="navigate('add-ingredient-section')">Add Ingredient</button>
+    <button class="sidebar-btn btn-green" id="add-dish" onclick="navigate('add-dish-section')">Add Dish</button>
+  </nav>
+</aside>
 
-    <main class="main">
-      <div class="dishes-container" id="dishes-container">
-       
-      </div>
+
+    <main id="main-content">
+      <section id="dish-list" class="main-section card-grid">
+        <!-- Dynamic dish cards will go here -->
+      </section>
+
+
+<!-- This is the new Add Dish section, hidden by default -->
+<section id="add-dish-section" class="main-section hidden">
+  <h2>Add New Dish</h2>
+
+  <div class="add-dish-toggle">
+    <button id="manualModeBtn" class="active">Manual Input</button>
+    <button id="searchModeBtn">Import from MealDB</button>
+  </div>
+
+  <div id="manualDishForm">
+    <label>Name</label>
+    <input type="text" id="newDishName" />
+
+    <label>Price</label>
+    <input type="number" id="newDishPrice" />
+
+    <label>Description</label>
+    <textarea id="newDishDescription"></textarea>
+
+    <label>Category</label>
+    <select id="newDishCategory">
+      <option value="Appetizer">Appetizer</option>
+      <option value="Main Course">Main Course</option>
+      <option value="Dessert">Dessert</option>
+      <option value="Side Dish">Side Dish</option>
+      <option value="Beverage">Beverage</option>
+    </select>
+
+    <label>Image URL</label>
+    <input type="text" id="newDishImage" placeholder="Paste image link" />
+
+    <button id="openIngredientEditorBtn">Add Ingredients</button>
+
+    <button id="confirmAddDishBtn" class="btn-green">Add Dish</button>
+  </div>
+  
+<div id="searchDishContainer" class="hidden">
+  <div id="searchDishForm">
+    <label for="mealSearchInput">Search TheMealDB:</label>
+    <input type="text" id="mealSearchInput" placeholder="e.g. Pasta, Chicken...">
+    <button id="mealSearchBtn">Search</button>
+  </div>
+
+  <div id="mealSearchResultsContainer">
+    <div id="mealSearchResults" class="meal-card-row"></div>
+  </div>
+</div>
+
+
+</section>
+
+<section id="statistics-section" class="main-section hidden">
+  <h2>Restaurant Statistics</h2>
+
+  <div class="stats-overview" id="statistics-text">
+    <div class="stat-card" id="average-rating">Average Rating:⭐ <span>Loading...</span></div>
+    <div class="stat-card" id="total-revenue">Total Revenue: <span>Loading...</span></div>
+    <div class="stat-card" id="total-dishes-sold">Total Dishes Sold: <span>Loading...</span></div>
+  </div>
+
+<div class="top-lists">
+  <div>
+    <h3>Top 5 Sellers</h3>
+    <div id="top-sellers-list" class="horizontal-card-list"></div>
+  </div>
+  <div>
+    <h3>Top 5 Rated</h3>
+    <div id="top-rated-list" class="horizontal-card-list"></div>
+  </div>
+</div>
+
+</section>
+
+<section id="reviews-section" class="main-section hidden">
+  <h2>All Dish Reviews</h2>
+  <div id="all-reviews-container" class="reviews-grid"></div>
+</section>
+
+<section id="add-ingredient-section" class="main-section hidden">
+  <h2>Add New Ingredient</h2>
+  <form id="add-ingredient-form">
+    <label>
+      Name:
+      <input type="text" id="ingredient-name" required>
+    </label>
+    <label>
+      Price:
+      <input type="number" id="ingredient-price" required min="0.01" step="0.01">
+    </label>
+  <label for="ingredient-unit">Unit</label>
+<select id="ingredient-unit">
+  <option value="kg">kg</option>
+  <option value="g">grams</option>
+  <option value="l">liter</option>
+  <option value="ml">ml</option>
+</select>
+    <label>
+      Image URL:
+      <input type="url" id="ingredient-image">
+    </label>
+    <button type="submit">Add Ingredient</button>
+  </form>
+  <p id="add-ingredient-message"></p>
+</section>
+
+
+
+<!--Settings-->
+<section id="settings-section" class="main-section hidden">
+  <h2>Settings</h2>
+
+  <label>Operational Cost Rate (%)</label>
+  <input type="number" id="op-cost" min="0" max="1" step="0.01" value="0.2" />
+
+  <label>Price Markup Multiplier</label>
+  <input type="number" id="markup" min="1" step="0.1" value="1.4" />
+
+  <label>Currency</label>
+  <select id="currency">
+  <option value="">--Please choose an option--</option>
+<option value="$">$</option>
+<option value="₪">₪</option>
+<option value="€">€</option>
+
+</select>
+
+  <label><input type="checkbox" id="auto-calc" checked /> Auto Calculate Prices</label>
+  <button id="log-out">Logout</button>
+  <button id="save-settings-btn">Save Settings</button>
+</section>
+
+
     </main>
   </div>
+
+<!-- ===== Confirmation Modal HTML ===== -->
+<div id="confirmModal" class="confirm-modal hidden">
+  <div class="confirm-modal-content">
+    <div id="confirmText">Are you sure?</div>
+    <div class="confirm-modal-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Dish Modal -->
+<div id="editDishModal" class="modal hidden">
+  <div class="modal-content edit-dish-modal">
+    <label>Name</label>
+    <input type="text" id="editDishName" />
+
+    <label>Price</label>
+    <div class="price-row">
+      <input type="number" id="editDishPrice" />
+      <button id="autoPriceBtn">Auto Calculate</button>
+    </div>
+
+    <label>Description</label>
+    <textarea id="editDishDescription"></textarea>
+
+    <label>Ingredients</label>
+    <div class="ingredients-row">
+      <button id="addIngredientBtn">+</button>
+    </div>
+    <div id="ingredientTags" class="ingredient-tags"></div>
+
+    <label for="editCategory">Category:</label>
+<select id="editDishCategory" name="category" class="form-control">
+  <option value="Appetizer">Appetizer</option>
+  <option value="Main Course">Main Course</option>
+  <option value="Dessert">Dessert</option>
+  <option value="Side Dish">Side Dish</option>
+  <option value="Beverage">Beverage</option>
+</select>
+
+    <div class="edit-buttons">
+      <button id="editConfirmBtn">Confirm</button>
+      <button id="editCancelBtn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!---Auo calculate modal-->
+<div id="autoCalcModal" class="modal hidden">
+  <h3>Auto Calculate</h3>
+
+  <label>Ingredient Cost</label>
+  <input type="text" id="autoIngCost" readonly />
+
+  <label>Operational Cost</label>
+  <input type="text" id="autoOpCost" readonly />
+
+  <label>Total Cost</label>
+  <input type="text" id="autoTotalCost" readonly />
+
+  <label>Recommended Price</label>
+  <input type="text" id="autoRecPrice" readonly />
+
+  <div class="auto-calc-buttons">
+    <button class="confirm-btn" id="autoApplyBtn">Apply</button>
+    <button class="cancel-btn" id="autoCancelBtn">Cancel</button>
+  </div>
+</div>
+
+<!-- Add/Edit Ingredients Modal -->
+<div id="addIngredientsModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Select Ingredients</h2>
+    <div class="ingredient-grid" id="ingredientGrid"></div>
+
+    <div style="margin-top: 1rem;">
+      <button onclick="saveIngredients()">Save</button>
+      <button onclick="closeModal('addIngredientsModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Ingredient Submodal -->
+<div id="editIngredientModal" class="modal hidden">
+  <div class="modal-content" id="editModalContent">
+    <!-- JS will populate this -->
+  </div>
+</div>
+
+<!--Dish stats modal-->
+
+<div id="dishStatsModal" class="modal hidden">
+  <div class="modal-content dish-stats-modal">
+    <h2 id="statsDishName">Dish Name</h2>
+    <div class="stats-grid">
+      <div>
+        <label>Avg. Daily Amount Sold</label>
+        <input id="statDailySold" disabled>
+      </div>
+      <div>
+        <label>Rating</label>
+        <input id="statRating" disabled>
+      </div>
+      <div>
+        <label>Ingredients Costs</label>
+        <input id="statIngCost" disabled>
+      </div>
+      <div>
+        <label>Operational Costs</label>
+        <input id="statOpCost" disabled>
+      </div>
+      <div>
+        <label>Price</label>
+        <input id="statPrice" disabled>
+      </div>
+      <div>
+        <label>Recommended Price</label>
+        <input id="statRecPrice" disabled>
+      </div>
+      <div>
+        <label>Avg Daily Amount Out</label>
+        <input id="statPercentage" disabled>
+      </div>
+    </div>
+    <canvas id="statsPieChart" width="200" height="200"></canvas>
+    <div class="stats-buttons">
+      <button class="stats-button" id="recommendationsBtn">Recommendations</button>
+      <button class="stats-button" id="reviewsBtn">Reviews</button>
+      <button class="stats-button" onclick="closeModal('dishStatsModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Reviews Modal -->
+<div id="dishReviewsModal" class="modal dish-reviews-modal hidden">
+  <div class="dish-reviews-modal-content">
+    <h2 id="reviewsTitle">Dish Reviews</h2>
+    <div id="reviewsList"></div>
+    <button class="stats-button" onclick="closeModal('dishReviewsModal')">Close</button>
+  </div>
+</div>
+
+<!-- Recommendations Modal -->
+<div id="dishRecommendationsModal" class="modal dish-recommendations-modal hidden">
+  <div class="dish-recommendations-modal-content">
+    <h2>Recommendations</h2>
+    <p id="recommendationsText"></p>
+    <button class="stats-button" onclick="closeModal('dishRecommendationsModal')">Close</button>
+  </div>
+</div>
+
+<div id="alertModal" class="hidden">
+  <div class="alert-modal-content">
+    <p id="alertMessage"></p>
+    <button id="alertOk">OK</button>
+  </div>
+</div>
+
+<div id="updatealertModal" class="hidden">
+  <div class="alert-modal-content">
+    <p id="updatealertMessage"></p>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ <script src="../js/managerDashboard.js"></script>
 </body>
 </html>

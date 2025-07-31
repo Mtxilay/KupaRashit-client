@@ -1,0 +1,769 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+/* ===== Confirmation Modal ===== */
+.confirm-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.confirm-modal.hidden {
+  display: none;
+}
+
+.confirm-modal-content {
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+  width: 300x;
+  font-size: xx-large;
+  padding: 10px;
+}
+
+.confirm-modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirm-modal-buttons button {
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: larger;
+}
+
+#confirmYes {
+  background-color: #FF4B4B;
+  color: white;
+}
+
+#confirmNo {
+  background-color: #007AFF;
+  color: black;
+}
+
+
+/* ===== Edit Modal ===== */
+
+
+.edit-dish-modal {
+  background-color: #8cc2ec;
+  border-radius: 25px;
+  padding: 20px;
+  width: 800px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000
+}
+
+.edit-dish-modal label {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.edit-dish-modal input[type="text"],
+.edit-dish-modal input[type="number"],
+.edit-dish-modal textarea {
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  border: none;
+  color: black;
+}
+
+.edit-dish-modal textarea {
+  height: 80px;
+  resize: none;
+}
+
+.price-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#autoPriceBtn {
+  background-color: #007aff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.edit-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+#editConfirmBtn {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  width: 45%;
+  cursor: pointer;
+}
+
+#editCancelBtn {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  width: 45%;
+  cursor: pointer;
+}
+
+.ingredients-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#addIngredientBtn {
+  background-color: green;
+  color: white;
+  font-size: 20px;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ingredient-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ingredient-tag {
+  background-color: #007aff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.ingredient-tag button {
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  margin-left: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  line-height: 14px;
+}
+
+
+/* Auto calc button*/
+
+/* ===== Auto Calculate Modal ===== */
+#autoCalcModal.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #8cc2ec;
+  border-radius: 25px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  padding: 24px 32px;
+  width: 400px;
+  height: 600px;
+  max-width: 90%;
+  z-index: 1200;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+#autoCalcModal.modal.show {
+  display: flex;
+}
+
+#autoCalcModal h3 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#autoCalcModal label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+#autoCalcModal input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+#autoCalcModal input[readonly] {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+#autoCalcModal .auto-calc-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+#autoCalcModal button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#autoCalcModal .confirm-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+#autoCalcModal .cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+/*ingredients modal*/
+/* == Ingredient Selection Modal == */
+
+#addIngredientsModal.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#addIngredientsModal.modal:not(.hidden) {
+  display: flex;
+}
+
+#addIngredientsModal .modal-content {
+   background-color: #8cc2ec;
+  border-radius: 25px;
+  padding: 20px;
+  width: 800px;
+  height: 700px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000
+}
+
+/* == Grid of Ingredients == */
+#addIngredientsModal .ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* == Individual Ingredient Card == */
+#addIngredientsModal .ingredient-card {
+  background-color: #f9f9f9;
+  color: black;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  display: flex;
+flex-direction: column;
+    justify-content: space-between;
+}
+
+.ingredient-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+
+.ingredient-card .ingredient-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: left;
+  flex: 1;
+  color: black;
+}
+
+.ingredient-card .use-checkbox {
+  margin-left: 0.5rem;
+}
+
+#addIngredientsModal .ingredient-card:hover {
+  transform: scale(1.03);
+}
+
+#addIngredientsModal .ingredient-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#addIngredientsModal .ingredient-card h4 {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+#addIngredientsModal .ingredient-card input[type="checkbox"] {
+  margin-top: 0.3rem;
+}
+
+
+
+#addIngredientsModal .ingredient-card .input-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+#addIngredientsModal .ingredient-card .input-row input {
+  width: 60px;
+  padding: 0.2rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #333;
+  background-color: #fff;
+}
+
+
+/* == Modal Footer Buttons == */
+#addIngredientsModal .modal-content button {
+  margin-right: 1rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+}
+
+#addIngredientsModal .modal-content button:first-of-type {
+  background-color: #007bff;
+  color: white;
+}
+
+#addIngredientsModal .modal-content button:last-of-type {
+  background-color: #ccc;
+}
+
+
+/*Dish stats*/
+.dish-stats-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #8cc4f7;
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  color: white;
+
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+}
+
+.stats-grid > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-grid label {
+  flex: 1;
+  font-weight: lighter;
+  font-size: x-large;
+}
+
+.stats-grid input {
+  flex: 1;
+  padding: 4px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: white;
+  text-align: center;
+}
+
+.stat-image {
+  width: 180px;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+canvas#statsPieChart {
+  width: 200px !important;
+  height: 200px !important;
+  margin-top: 20px;
+}
+
+.stats-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.stats-button {
+  padding: 8px 16px;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  background-color: #007aff;
+  border: 2px solid #000;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* === Reviews Modal === */
+.dish-reviews-modal-content {
+  background-color: #8ec9f0;
+  padding: 30px;
+  border-radius: 20px;
+  width: 600px;
+  max-height: 80%;
+  overflow-y: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+/* === Recommendations Modal === */
+.dish-recommendations-modal-content {
+  background-color: #8ec9f0;
+  padding: 30px;
+  border-radius: 20px;
+  width: 500px;
+  max-height: 70%;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.review-item {
+    
+
+    background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  width: 550px;
+  max-height: 80%;
+  text-align: center;
+  margin: 10px;
+}
+
+
+/*Add Dish*/
+
+#add-dish-section {
+  background-color: #89c4f4;
+  padding: 20px;
+  padding-top: 10px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  height:100%;
+  max-height: 670px;
+  margin: 10px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Jost', sans-serif;
+ 
+}
+
+#add-dish-section h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: bold;
+   color: white;
+}
+
+#add-dish-section label {
+  display: block;
+  margin-top: 12px;
+  font-weight: lighter;
+  font-size: 20px;
+   color: white;
+}
+
+#add-dish-section input,
+#add-dish-section textarea,
+#add-dish-section select {
+  width: 90%;
+  padding: 10px;
+  margin-top: 4px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+#add-dish-section textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+#add-dish-section .add-dish-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+#add-dish-section .add-dish-toggle button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #ddd;
+  transition: background-color 0.2s ease;
+}
+
+#add-dish-section .add-dish-toggle button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+#add-dish-section #confirmAddDishBtn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+
+
+#mealSearchBtn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+#openIngredientEditorBtn{
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+#import-btn {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+#mealSearchResultsContainer {
+  overflow-x: auto;
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+.meal-card-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+.meal-card {
+  flex: 0 0 calc(33.333% - 1rem); /* 3 cards per row */
+  max-width: calc(33.333% - 1rem);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: white;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.meal-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.meal-card:hover {
+  transform: scale(1.02);
+}
+
+
+/*Alerts*/
+
+/* ===== ALERT MODAL WRAPPER ===== */
+#alertModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; /* make sure it sits above other elements */
+}
+
+#updatealertModal{
+  position: fixed;
+  border: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; /* make sure it sits above other elements */
+  border-radius: 10px;
+  
+}
+
+/* ===== HIDE MODAL ===== */
+#alertModal.hidden {
+  display: none;
+}
+
+#updatealertModal.hidden {
+  display: none;
+}
+
+/* ===== ALERT MODAL CONTENT BOX ===== */
+#alertModal .alert-modal-content {
+  background-color: #ffffff;
+  padding: 24px 32px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+#updatealertModal .alert-modal-content {
+  background-color: #ffffff;
+  padding: 24px 32px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+
+
+/* ===== ALERT MESSAGE TEXT ===== */
+#alertModal #alertMessage {
+  font-size: xx-large;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+/* ===== OK BUTTON STYLE ===== */
+#alertModal #alertOk {
+  padding: 10px 20px;
+  background-color: #4CAF50; /* green */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: xx-large;
+}
+
+#alertModal #alertOk:hover {
+  background-color: #45a049;
+}
+
+
