@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("paymentModal").classList.add("hidden");
     }
 
-    // אישור תשלום
+    // אישור תשלום (סימולציה בלבד)
     if (e.target && e.target.id === "confirmPayment") {
       const cardNumber = document.getElementById("cardNumber").value.trim();
       const expDate = document.getElementById("expDate").value.trim();
@@ -51,23 +51,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!orderRes.ok) throw new Error("Failed to create order");
         const orderData = await orderRes.json();
-    
 
-        // תשלום
-        const paymentRes = await fetch(`https://kuparashit-server.onrender.com/api/payments/${orderData._id}`, {
+        // עדכון ההזמנה ל-paid – בלי לבדוק אשראי
+        await fetch(`https://kuparashit-server.onrender.com/api/payments/${orderData._id}`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ cardNumber, expDate, ccv, holder }),
+          }
         });
-   console.log(orderData._id);
-        if (!paymentRes.ok) throw new Error("Payment failed");
 
         alert("Payment successful!");
+
         document.getElementById("paymentModal").classList.add("hidden");
         document.getElementById("order-summary-modal").classList.add("hidden");
+
         localStorage.removeItem("currentOrder");
       } catch (err) {
         console.error("Payment error:", err);

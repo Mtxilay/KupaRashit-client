@@ -648,3 +648,30 @@ html, body {
   color: #666;
   margin-top: 8px;
 }
+#paymentModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6); /* הצללה */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#paymentModal.hidden {
+  display: none;
+}
+
+#paymentModal .modal-content {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  font-family: 'Khand', sans-serif;
+  text-align: center;
+}
