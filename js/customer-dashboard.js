@@ -219,7 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => {
         if (!res.ok) throw new Error("Order failed");
         alert("Order placed successfully!");
-        localStorage.removeItem("currentOrder");
         document.getElementById("order-summary-modal").classList.add("hidden");
       })
       .catch(err => {
