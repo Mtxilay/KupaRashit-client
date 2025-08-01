@@ -959,6 +959,58 @@ async function openDishRecommendationsModal(dishId) {
 
 //Add dish
 
+
+
+document.getElementById("confirmAddDishBtn").addEventListener("click", async () => {
+  console.log("add clicked");
+  const token = localStorage.getItem("userToken");
+
+  const name = document.getElementById("newDishName").value.trim();
+  const price = parseFloat(document.getElementById("newDishPrice").value);
+  const description = document.getElementById("newDishDescription").value.trim();
+  const category = document.getElementById("newDishCategory").value;
+  const image = document.getElementById("newDishImage").value.trim();
+
+  if (!name || isNaN(price) || price <= 0) {
+    return showAlert("Please fill out the name and valid price.");
+  }
+
+  const dishData = {
+    name,
+    price,
+    description,
+    category,
+    image,
+    ingredients: []
+  };
+
+  try {
+    console.log("saving...")
+    const res = await fetch("https://kuparashit-server.onrender.com/api/dishes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(dishData)
+    });
+
+    if (!res.ok) throw new Error("Failed to add dish");
+
+    const createdDish = await res.json();
+    console.log(res);
+    showAlert(`✅ "${createdDish.name}" added!`);
+    renderDishCard(createdDish, token); // Rerender
+    newDishIngredients = [];
+
+  } catch (err) {
+    console.error("Add dish error:", err);
+    showAlert("❌ Error adding dish.");
+  }
+});
+
+
+
 // 🧠 Get the auth token (required for any protected fetch requests)
 const token = localStorage.getItem("userToken");
 if (!token) {
